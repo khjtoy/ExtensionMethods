@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Copyright (c) 2022 khjtoy
 public static class ExtensionMethods
 {
     #region Transform
@@ -24,6 +25,32 @@ public static class ExtensionMethods
         {
             transform.GetChild(i).gameObject.SetActive(false);
         }
+    }
+    public static void ResetPosition(this Transform transform)
+    {
+        transform.localPosition = Vector3.zero;
+    }
+    public static void SetPosition(this Transform transform, float x, float y, float z)
+    {
+        transform.localPosition = new Vector3(x, y, z);
+    }
+    public static void SetPositionX(this Transform transform, float x)
+    {
+        Vector3 vec = transform.localPosition;
+        vec.x = x;
+        transform.localPosition = vec;
+    }
+    public static void SetPositionY(this Transform transform, float y)
+    {
+        Vector3 vec = transform.localPosition;
+        vec.y = y;
+        transform.localPosition = vec;
+    }
+    public static void SetPositionZ(this Transform transform, float z)
+    {
+        Vector3 vec = transform.localPosition;
+        vec.z = z;
+        transform.localPosition = vec;
     }
     public static void AddPosition(this Transform trans, float x, float y, float z)
     {
