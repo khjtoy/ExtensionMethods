@@ -13,17 +13,107 @@ public static class ExtensionMethods
     }
     public static void DestoryChildren(this Transform transform)
     {
-        for(var i = transform.childCount - 1; i >= 0; i--)
+        for (var i = transform.childCount - 1; i >= 0; i--)
         {
             UnityEngine.Object.Destroy(transform.GetChild(i).gameObject);
         }
     }
     public static void DisableChildren(this Transform transform)
     {
-        for(var i = transform.childCount - 1; i >= 0; i--)
+        for (var i = transform.childCount - 1; i >= 0; i--)
         {
             transform.GetChild(i).gameObject.SetActive(false);
         }
+    }
+    public static void AddPosition(this Transform trans, float x, float y, float z)
+    {
+        trans.localPosition += new Vector3(x, y, z);
+    }
+    public static void AddPositionX(this Transform trans, float x)
+    {
+        Vector3 vec = trans.localPosition;
+        vec.x += x;
+        trans.localPosition = vec;
+    }
+    public static void AddPositionY(this Transform trans, float y)
+    {
+        Vector3 vec = trans.localPosition;
+        vec.y += y;
+        trans.localPosition = vec;
+    }
+    public static void AddPositionZ(this Transform trans, float z)
+    {
+        Vector3 vec = trans.localPosition;
+        vec.z += z;
+        trans.localPosition = vec;
+    }
+    public static void SubPosition(this Transform trans, float x, float y, float z)
+    {
+        trans.localPosition -= new Vector3(x, y, z);
+    }
+    public static void SubPositionX(this Transform trans, float x)
+    {
+        Vector3 vec = trans.localPosition;
+        vec.x -= x;
+        trans.localPosition = vec;
+    }
+    public static void SubPositionY(this Transform trans, float y)
+    {
+        Vector3 vec = trans.localPosition;
+        vec.y -= y;
+        trans.localPosition = vec;
+    }
+    public static void SubPositionZ(this Transform trans, float z)
+    {
+        Vector3 vec = trans.localPosition;
+        vec.z -= z;
+        trans.localPosition = vec;
+    }
+    public static void MulPosition(this Transform trans, float x, float y, float z = 1)
+    {
+        trans.localPosition = new Vector3(trans.localPosition.x * x, trans.localPosition.y * y + trans.localPosition.z * z);
+    }
+    public static void MulPositionX(this Transform trans, float x)
+    {
+        Vector3 vec = trans.localPosition;
+        vec.x *= x;
+        trans.localPosition = vec;
+    }
+    public static void MulPositionY(this Transform trans, float y)
+    {
+        Vector3 vec = trans.localPosition;
+        vec.y *= y;
+        trans.localPosition = vec;
+    }
+    public static void MulPositionZ(this Transform trans, float z)
+    {
+        Vector3 vec = trans.localPosition;
+        vec.z *= z;
+        trans.localPosition = vec;
+    }
+    public static void DivPosition(this Transform trans, float x, float y, float z = 0)
+    {
+        trans.localPosition = new Vector3(trans.localPosition.x == 0 || x == 0 ? trans.localPosition.x : trans.localPosition.x / x,
+                                          trans.localPosition.y == 0 || y == 0 ? trans.localPosition.y : trans.localPosition.y / y,
+                                          trans.localPosition.z == 0 || z == 0 ? trans.localPosition.z : trans.localPosition.z / z);
+    }
+    public static void DivPositionX(this Transform trans, float x)
+    {
+        Vector3 vec = trans.localPosition;
+        vec.x /= x;
+        trans.localPosition = vec;
+    }
+    public static void DivPositionY(this Transform trans, float y)
+    {
+        Vector3 vec = trans.localPosition;
+        vec.y /= y;
+        trans.localPosition = vec;
+    }
+    public static void DivPositionZ(this Transform trans, float z)
+    {
+        Vector3 vec = trans.localPosition;
+        vec.z /= z;
+        trans.localPosition = vec;
     }
     #endregion
     #region Vector
@@ -203,8 +293,8 @@ public static class ExtensionMethods
     }
     public static Vector3 DivVec(this Vector3 vector, float x, float y, float z = 0)
     {
-        return new Vector3(x == 0 || vector.x == 0 ? vector.x : vector.x / x, 
-                           y == 0 || vector.y == 0 ? vector.y : vector.y / y, 
+        return new Vector3(x == 0 || vector.x == 0 ? vector.x : vector.x / x,
+                           y == 0 || vector.y == 0 ? vector.y : vector.y / y,
                            z == 0 || vector.z == 0 ? vector.z : vector.z / z);
     }
     public static Vector3 DivVec(this Vector3 vector, Vector3 offset)
@@ -289,7 +379,7 @@ public static class ExtensionMethods
     }
     public static void Shuffle<T>(this List<T> list)
     {
-        for(int i = list.Count - 1; i > 1; i--)
+        for (int i = list.Count - 1; i > 1; i--)
         {
             int j = UnityEngine.Random.Range(0, i + 1);
             T temp = list[j];
