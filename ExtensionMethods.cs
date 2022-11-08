@@ -140,9 +140,9 @@ public static class ExtensionMethods
     }
     public static void DivPosition(this Transform trans, Vector3 vector)
     {
-        trans.localPosition = new Vector3(trans.localPosition.x == 0 || vec.x == 0 ? trans.localPosition.x : trans.localPosition.x / vec.x,
-                                          trans.localPosition.y == 0 || vec.y == 0 ? trans.localPosition.y : trans.localPosition.y / vec.y,
-                                          trans.localPosition.z == 0 || vec.z == 0 ? trans.localPosition.z : trans.localPosition.z / vec.z);
+        trans.localPosition = new Vector3(trans.localPosition.x == 0 || vector.x == 0 ? trans.localPosition.x : trans.localPosition.x / vector.x,
+                                          trans.localPosition.y == 0 || vector.y == 0 ? trans.localPosition.y : trans.localPosition.y / vector.y,
+                                          trans.localPosition.z == 0 || vector.z == 0 ? trans.localPosition.z : trans.localPosition.z / vector.z);
     }
     public static void DivPositionX(this Transform trans, float x)
     {
