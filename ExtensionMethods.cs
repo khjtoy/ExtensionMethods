@@ -26,6 +26,42 @@ public static class ExtensionMethods
             transform.GetChild(i).gameObject.SetActive(false);
         }
     }
+    public static List<GameObject> AllChildrenObjList(this Transform transform)
+    {
+        List<GameObject> childObjects = new List<GameObject>();
+        for (var i = 0; i < transform.childCount; i++)
+        {
+            childObjects.Add(transform.GetChild(i).gameObject);
+        }
+        return childObjects;
+    }
+    public static GameObject[] AllChildrenObjArray(this Transform transform)
+    {
+        GameObject[] childObjects = new GameObject[transform.childCount];
+        for (var i = 0; i < transform.childCount; i++)
+        {
+            childObjects[i] = transform.GetChild(i).gameObject;
+        }
+        return childObjects;
+    }
+    public static List<Transform> AllChildrenObjListT(this Transform transform)
+    {
+        List<Transform> childObjects = new List<Transform>();
+        for (var i = 0; i < transform.childCount; i++)
+        {
+            childObjects.Add(transform.GetChild(i));
+        }
+        return childObjects;
+    }
+    public static Transform[] AllChildrenObjArrayT(this Transform transform)
+    {
+        Transform[] childObjects = new Transform[transform.childCount];
+        for (var i = 0; i < transform.childCount; i++)
+        {
+            childObjects[i] = transform.GetChild(i);
+        }
+        return childObjects;
+    }
     public static void ResetPosition(this Transform transform)
     {
         transform.localPosition = Vector3.zero;
@@ -556,6 +592,10 @@ public static class ExtensionMethods
     {
         return new Vector3(vector.x, 0f, vector.z);
     }
+    public static Vector3 Flattened(this Vector2 vector)
+    {
+        return new Vector3(vector.x, 0f, vector.y);
+    }
     public static Vector3Int Flattened(this Vector3Int vector)
     {
         return new Vector3Int(vector.x, 0, vector.z);
@@ -666,10 +706,17 @@ public static class ExtensionMethods
     }
     #endregion
     #region GameObject
-    public static T GetOrAddComponent<T>(this GameObject gameObject) where T : UnityEngine.Component
+    public static T GetOrAddComponent<T>(this GameObject gameObject, bool flagAdd = true) where T : UnityEngine.Component
     {
         T component = gameObject.GetComponent<T>();
-        if (component == null) gameObject.AddComponent<T>();
+        if (component == null)
+        {
+            gameObject.AddComponent<T>();
+            if (!flagAdd)
+            {
+                Debug.LogError($"This {typeof(T).ToString()} Added.");
+            }
+        }
         return component;
     }
     public static bool HasComponent<T>(this GameObject gameObject) where T : UnityEngine.Component
